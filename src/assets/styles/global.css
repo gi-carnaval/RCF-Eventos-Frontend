@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background: var(--navy-90);
+  color: var(--white-0);
+
+  --navy-10: #6E92E9;
+  --navy-20: #514EF3;
+  --navy-40: #2B3B61;
+  --navy-60: #1F2940;
+  --navy-90: #141B2D;
+
+  --white-5: #F8F8FF;
+  --white-0: #ffffff;
+
+  --grey-10: #F6FAFD;
+  --grey-50: #9CB0C0;
+  --grey-70: #7E92A2;
+
+}
