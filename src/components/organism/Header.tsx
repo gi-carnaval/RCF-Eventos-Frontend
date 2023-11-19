@@ -1,4 +1,4 @@
-import { usePopup } from '../../Hooks/useModal'
+import { usePopup } from '../../Hooks/usePopup'
 import RCFLogo from '../../assets/Logo-RCF-Eventos.png'
 import CreateEventForm from '../molecules/CreateEventForm'
 

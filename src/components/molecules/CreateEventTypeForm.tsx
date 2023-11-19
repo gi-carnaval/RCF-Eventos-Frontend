@@ -37,7 +37,6 @@ export default function CreateEventTypeForm() {
     fetchEventTypesData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  console.log('Erro: ', errors.eventType?.type)
   return (
     <div className="flex flex-col gap-6 py-6">
       <div>

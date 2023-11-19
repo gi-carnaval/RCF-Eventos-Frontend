@@ -1,4 +1,4 @@
-import { usePopup } from '../../Hooks/useModal'
+import { usePopup } from '../../Hooks/usePopup'
 
 export default function RegularPopup() {
   const { isPopupOpen, closePopup, popupContent } = usePopup()

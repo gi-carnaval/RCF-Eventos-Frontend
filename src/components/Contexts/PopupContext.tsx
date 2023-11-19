@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react'
-import { PopupContextProps } from '../../Hooks/useModal'
+import { PopupContextProps } from '../../Hooks/usePopup'
 
 export const PopupContext = createContext<PopupContextProps | undefined>(
   undefined,
