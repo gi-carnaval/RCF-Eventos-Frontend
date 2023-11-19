@@ -1,0 +1,45 @@
+import { useParams, useNavigate } from 'react-router-dom'
+import eventRepository from '../../repositories/EventRepository'
+import { useEffect, useState } from 'react'
+import { IEvent } from '../../types/event'
+
+type ParamsProps = {
+  id: string
+}
+
+export default function SingleEvent() {
+  const { id } = useParams<ParamsProps>()
+  const [event, setEvent] = useState<IEvent>()
+
+  const navigate = useNavigate()
+
+  async function fetchEventData(eventId: string) {
+    if (!eventId) return
+    const res = await eventRepository.getEventById(eventId)
+    if (res.data) {
+      setEvent(res.data)
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      fetchEventData(id)
+    }
+  }, [id])
+
+  return (
+    <>
+      <div className="flex justify-start">
+        <span
+          className="cursor-pointer hover:opacity-25"
+          onClick={() => {
+            navigate('..', { relative: 'route' })
+          }}
+        >
+          Voltar
+        </span>
+      </div>
+      <h1 className="text-2xl font-bold text-center">{event?.contratante}</h1>
+    </>
+  )
+}
