@@ -5,9 +5,9 @@ import EmptyRowEvent from '../molecules/EmptyRowEvent'
 
 export interface EventsProps {
   id: string
-  contratante: string
-  tipoEvento: {
-    tipo: string
+  hirer: string
+  eventType: {
+    type: string
   }
 }
 

@@ -1,5 +1,5 @@
 export interface IEvent {
   id?: string
-  contratante: string
-  tipoDeEvento: string
+  hirer: string
+  eventType: string
 }

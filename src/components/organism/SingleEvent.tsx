@@ -39,7 +39,7 @@ export default function SingleEvent() {
           Voltar
         </span>
       </div>
-      <h1 className="text-2xl font-bold text-center">{event?.contratante}</h1>
+      <h1 className="text-2xl font-bold text-center">{event?.hirer}</h1>
     </>
   )
 }

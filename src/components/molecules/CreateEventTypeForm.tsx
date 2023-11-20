@@ -6,11 +6,22 @@ import InputErrorMessage from '../atoms/InputErrorMessage'
 import Input from '../atoms/Input'
 
 export interface FormData {
-  eventType: string
+  type: string
 }
 
 export default function CreateEventTypeForm() {
-  const [eventTypeExists, setEventTypeExists] = useState<IEventTypes[]>([])
+  const [eventTypeDataExists, setEventTypeDataExists] = useState<IEventTypes[]>(
+    [],
+  )
+
+  function eventTypeValidation(value: string) {
+    const valueTransformed = value.toLowerCase()
+    return !eventTypesNames.includes(valueTransformed)
+  }
+
+  const eventTypesNames = eventTypeDataExists.map((eventType) => {
+    return eventType.type
+  })
 
   const {
     register,
@@ -18,21 +29,21 @@ export default function CreateEventTypeForm() {
     formState: { errors },
   } = useForm<FormData>()
 
-  function onSubmit(data: FormData) {
+  async function onSubmit(data: FormData) {
     alert(JSON.stringify(data))
+    await eventTypesRepository.createEventTypes(data)
   }
-
+  console.log('Errors: ', errors)
   async function fetchEventTypesData() {
     const res = await eventTypesRepository.getEventTypes()
     if (res.data) {
-      setEventTypeExists(res.data)
+      setEventTypeDataExists(res.data)
     }
   }
 
   // const handleSubmit = async (values: IEventTypes) => {
   //   await eventTypesRepository.createEventTypes(values)
   // }
-
   useEffect(() => {
     fetchEventTypesData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,10 +56,16 @@ export default function CreateEventTypeForm() {
           labelName="Tipo de Evento"
           placeholder="Digite aqui..."
           type="text"
-          register={register('eventType', { required: true })}
+          register={register('type', {
+            required: true,
+            validate: async (value) => await eventTypeValidation(value),
+          })}
         />
-        {errors.eventType?.type === 'required' && (
+        {errors.type?.type === 'required' && (
           <InputErrorMessage>Tipo de Evento é obrigatório *</InputErrorMessage>
+        )}
+        {errors.type?.type === 'validate' && (
+          <InputErrorMessage>Tipo de Evento já cadastrado *</InputErrorMessage>
         )}
       </div>
 
