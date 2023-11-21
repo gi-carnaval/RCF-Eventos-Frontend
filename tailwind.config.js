@@ -9,9 +9,9 @@ export default {
           5: 'var(--white-5)',
         },
         gray: {
-          10: 'var(--grey-10)',
-          50: 'var(--grey-50)',
-          70: 'var(--grey-70)',
+          10: 'var(--gray-10)',
+          50: 'var(--gray-50)',
+          70: 'var(--gray-70)',
         },
         navy: {
           10: 'var(--navy-10)',

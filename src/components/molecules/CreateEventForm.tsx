@@ -63,13 +63,13 @@ export default function CreateEventForm() {
           <InputErrorMessage>Este campo é obrigatório *</InputErrorMessage>
         )}
       </div>
-      <div className="flex flex-col font-grey-70">
+      <div className="flex flex-col font-gray-70">
         <div className="flex flex-col">
           <label htmlFor="tipoEvento">Tipo de Evento</label>
           <select
-            className="text-grey-70 bg-navy-60 px-5 py-2 rounded-lg"
+            className="text-gray-70 bg-navy-60 px-5 py-2 rounded-lg"
             {...register('eventType', {
-              required: true,
+              // required: true,
               validate: (value) => {
                 return value !== '0'
               },
@@ -88,7 +88,7 @@ export default function CreateEventForm() {
               )
             })}
           </select>
-          {errors.hirer?.type === 'required' && (
+          {errors.eventType?.type === 'validate' && (
             <InputErrorMessage>Selecione uma opção válida *</InputErrorMessage>
           )}
         </div>

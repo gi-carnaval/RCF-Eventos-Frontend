@@ -15,7 +15,7 @@ export default function Input({ labelName, register, ...props }: InputProps) {
         {labelName}
       </label>
       <input
-        className="text-grey-70 bg-navy-60 px-5 py-2 rounded-lg border-[1px] border-gray-100"
+        className="text-gray-70 bg-navy-60 px-5 py-2 rounded-lg border-[1px] border-gray-100"
         {...props}
         {...register}
       />

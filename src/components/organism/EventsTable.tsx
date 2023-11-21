@@ -29,26 +29,24 @@ export default function EventsTable() {
     fetchEvents()
   }, [])
 
-  return (
+  return events.length > 0 ? (
     <table className="w-full">
       <thead>
         <tr>
-          <td className="text-grey-70">Contratante(s)</td>
-          <td className="text-grey-70">Data Evento Principal</td>
-          <td className="text-grey-70">Tipo de Evento</td>
-          <td className="text-grey-70">Status</td>
-          <td className="text-grey-70">Ações</td>
+          <td className="text-gray-70">Contratante(s)</td>
+          <td className="text-gray-70">Data Evento Principal</td>
+          <td className="text-gray-70">Tipo de Evento</td>
+          <td className="text-gray-70">Status</td>
+          <td className="text-gray-70">Ações</td>
         </tr>
       </thead>
       <tbody>
-        {events.length > 0 ? (
-          events.map((event) => {
-            return <EventRow key={event.id} event={event} />
-          })
-        ) : (
-          <EmptyRowEvent />
-        )}
+        {events.map((event) => {
+          return <EventRow key={event.id} event={event} />
+        })}
       </tbody>
     </table>
+  ) : (
+    <EmptyRowEvent />
   )
 }

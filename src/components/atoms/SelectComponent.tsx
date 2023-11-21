@@ -19,7 +19,7 @@ const SelectComponent = () => {
       <select
         value={selectedOption}
         onChange={handleSelectChange}
-        className="text-grey-70 bg-navy-60 px-5 py-2 rounded-lg"
+        className="text-gray-70 bg-navy-60 px-5 py-2 rounded-lg"
       >
         {options.map((option, index) => (
           <option key={index} value={option}>
