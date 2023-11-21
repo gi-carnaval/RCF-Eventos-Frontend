@@ -7,6 +7,7 @@ export default {
         white: {
           0: 'var(--white-0)',
           5: 'var(--white-5)',
+          10: 'var(--white-10)',
         },
         gray: {
           10: 'var(--gray-10)',

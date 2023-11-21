@@ -22,9 +22,12 @@
     ],
     "paths": {
       "@/*": ["/*"],
-      "@/components/*": ["src/components/*"],
-      "@/assets/*": ["src/assets/*"]
-    }
+      "@/src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@assets/*": ["./src/assets/*"]
+    },
+
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "pages/trabalhos/[slug]"],
   "exclude": ["node_modules"]
