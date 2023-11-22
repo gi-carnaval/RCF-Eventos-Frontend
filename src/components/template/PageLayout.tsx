@@ -9,12 +9,14 @@ interface LayoutProps {
 
 export function PageLayout({ children }: LayoutProps) {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full overflow-hidden">
       <PopupProvider>
         <Header />
         <div className="flex w-full">
           <Sidebar />
-          <main className="relative w-full p-6">{children}</main>
+          <main className="relative top-24 left-24 w-[calc(100%_-_6rem)] p-6 z-0">
+            {children}
+          </main>
           <RegularPopup />
         </div>
       </PopupProvider>

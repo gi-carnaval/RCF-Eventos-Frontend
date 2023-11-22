@@ -11,7 +11,7 @@ export default function Header() {
   }
 
   return (
-    <header className="h-24 bg-navy-60 flex border-b-2 border-b-navy-40">
+    <header className="fixed z-10 w-screen h-24 bg-navy-60 flex border-b-2 border-b-navy-40">
       <div className="w-24 border-r-2 border-r-navy-40 p-6">
         <img
           src={RCFLogo}
