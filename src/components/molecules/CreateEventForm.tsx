@@ -29,14 +29,12 @@ export default function CreateEventForm() {
     const res = await eventTypesRepository.getEventTypes()
     if (res.data) {
       setEventTypesData(res.data)
-      console.log(eventTypesData)
     }
   }
 
   async function onSubmit(data: FormData) {
     await eventRepository.createEvent(data)
     // alert('Enviou: ')
-    // console.log('Data: ', data)
   }
 
   const CreateEventTypePopupContent = {

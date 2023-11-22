@@ -10,7 +10,6 @@ async function createAppointment({
   appointmentData,
   eventId,
 }: CreateAppointmentProps) {
-  console.log(eventId)
   return await api.post(`/appointment`, {
     appointmentTitle: appointmentData.appointmentTitle,
     appointmentDate: appointmentData.date,

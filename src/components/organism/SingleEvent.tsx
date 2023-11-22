@@ -6,6 +6,7 @@ import ButtonAdd from '../atoms/ButtonAdd'
 import { usePopup } from '../../Hooks/usePopup'
 import ThTable from '../atoms/ThTable'
 import CreateAppointmentForm from '../molecules/CreateAppointment'
+import { MdModeEditOutline } from 'react-icons/md'
 
 type ParamsProps = {
   id: string
@@ -18,7 +19,6 @@ export default function SingleEvent() {
   const navigate = useNavigate()
 
   async function fetchEventData(eventId: string) {
-    if (!eventId) return
     const res = await eventRepository.getEventById(eventId)
     if (res.data) {
       setEvent(res.data)
@@ -27,9 +27,17 @@ export default function SingleEvent() {
 
   const { openPopup, applyContent } = usePopup()
 
-  const popupContent = {
+  const addAppointmentPopupContent = {
     title: 'Adicionar Compromisso',
-    content: <CreateAppointmentForm />,
+    content: <CreateAppointmentForm eventId={id} />,
+  }
+  const editAppointmentPopupContent = {
+    title: 'Editar Compromisso',
+    content: <CreateAppointmentForm eventId={id} />,
+  }
+
+  function editAppointment(id: string | undefined) {
+    alert(id)
   }
 
   useEffect(() => {
@@ -37,7 +45,6 @@ export default function SingleEvent() {
       fetchEventData(id)
     }
   }, [id])
-  console.log('EVENTO: ', event)
   return (
     <>
       <div className="flex justify-start">
@@ -52,9 +59,9 @@ export default function SingleEvent() {
       </div>
       <h1 className="text-2xl font-bold text-center">{event?.hirer}</h1>
       <div className="flex flex-col justify-center items-center gap-6">
-        <div className="w-full flex flex-col px-40 items-center">
+        <div className="w-full flex flex-col px-40 py-12 items-center">
           <table className="w-full ">
-            <caption className="text-lg font-bold text-gray-70 border-gray-70 border-x-2 border-t-2">
+            <caption className="text-lg font-bold text-gray-70">
               Compromissos
             </caption>
             <thead>
@@ -69,23 +76,43 @@ export default function SingleEvent() {
             <tbody>
               {event?.Appointment?.map((appointment) => {
                 return (
-                  <tr key={appointment.id}>
-                    <td className="border-2 border-gray-70 w-1/5 text-center">
-                      {appointment.appointmentTitle}
-                    </td>
-                    <td className="border-2 border-gray-70 w-1/5 text-center">
-                      {appointment.date}
-                    </td>
-                    <td className="border-2 border-gray-70 w-1/5 text-center">
-                      {appointment.locale}
-                    </td>
-                    <td className="border-2 border-gray-70 w-1/5 text-center">
-                      {appointment.dayOfWeek}
-                    </td>
-                    <td className="border-2 border-gray-70 w-1/5 text-center">
-                      {appointment.time}
-                    </td>
-                  </tr>
+                  <>
+                    <tr
+                      key={appointment.id}
+                      className="h-16 border-b-2 border-b-navy-60 px-6 hover:bg-navy-60 cursor-pointer"
+                      onClick={() => {
+                        openPopup()
+                        applyContent(editAppointmentPopupContent)
+                      }}
+                    >
+                      <td className="w-1/5  text-base text-white-5 px-6">
+                        {appointment.appointmentTitle}
+                      </td>
+                      <td className="w-1/5  text-base text-white-5 px-6">
+                        {appointment.date}
+                      </td>
+                      <td className="w-1/5  text-base text-white-5 px-6">
+                        {appointment.locale}
+                      </td>
+                      <td className="w-1/5  text-base text-white-5 px-6 capitalize">
+                        {appointment.dayOfWeek}
+                      </td>
+                      <td className="w-1/5  text-base text-white-5 px-6">
+                        {appointment.time}
+                      </td>
+                      <td
+                        onClick={() => {
+                          editAppointment(appointment.id)
+                        }}
+                        className="group/td fixed justify-center items-center hidden w-8 h-8 rounded-full -ml-2 cursor-pointer bg-navy-20 group-hover/tr:flex hover:w-20 hover:rounded-xl transition-all active:brightness-75 "
+                      >
+                        <MdModeEditOutline />
+                        <span className="hidden group-hover/td:flex">
+                          Editar
+                        </span>
+                      </td>
+                    </tr>
+                  </>
                 )
               })}
             </tbody>
@@ -93,7 +120,7 @@ export default function SingleEvent() {
           <ButtonAdd
             onClick={() => {
               openPopup()
-              applyContent(popupContent)
+              applyContent(addAppointmentPopupContent)
             }}
           />
         </div>

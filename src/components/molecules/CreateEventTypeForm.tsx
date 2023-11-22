@@ -33,7 +33,6 @@ export default function CreateEventTypeForm() {
     alert(JSON.stringify(data))
     await eventTypesRepository.createEventTypes(data)
   }
-  console.log('Errors: ', errors)
   async function fetchEventTypesData() {
     const res = await eventTypesRepository.getEventTypes()
     if (res.data) {

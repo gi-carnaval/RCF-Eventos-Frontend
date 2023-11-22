@@ -18,9 +18,7 @@ export default function EventsTable() {
     try {
       const response = await api.get('/events')
       response && setEvents(response.data)
-      console.log(response)
     } catch (error) {
-      console.log(error)
       alert('Não foi possível carregar os eventos')
     }
   }
