@@ -1,7 +1,7 @@
 import { tv, VariantProps } from 'tailwind-variants'
 
 const th = tv({
-  base: 'border-2 border-gray-80',
+  base: 'text-gray-70',
   variants: {
     size: {
       default: 'w-1/6',
