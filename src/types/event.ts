@@ -1,9 +1,9 @@
 export interface AppointmentProps {
   appointmentTitle: string
   date: string
-  dayOfWeek: string // Aqui, a escolha entre Date ou string pode ser ajustada dependendo da manipulação dos dados
-  eventId: string
-  id: string
+  dayOfWeek?: string
+  eventId?: string
+  id?: string
   locale: string
   time: string
 }

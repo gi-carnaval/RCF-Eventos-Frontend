@@ -3,14 +3,15 @@ import { AppointmentProps } from '../types/event'
 
 interface CreateAppointmentProps {
   appointmentData: AppointmentProps
-  eventId: string
+  eventId?: string
 }
 
 async function createAppointment({
-  eventId,
   appointmentData,
+  eventId,
 }: CreateAppointmentProps) {
-  return await api.post<AppointmentProps>(`/appointment/`, {
+  console.log(eventId)
+  return await api.post(`/appointment`, {
     appointmentTitle: appointmentData.appointmentTitle,
     appointmentDate: appointmentData.date,
     appointmentLocale: appointmentData.locale,
