@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import { EventsProps } from '../organism/EventsTable'
+import { EventsProps } from '../template/EventsTable'
+import TableRow from '../atoms/TableTr'
+import TableTdContent from '../atoms/TableTdContent'
 
 interface EventRowProps {
   event: EventsProps
@@ -13,23 +15,17 @@ export default function EventRow({ event }: EventRowProps) {
   }
 
   return (
-    <tr
-      className="h-16 border-b-2 border-b-navy-60 px-6 hover:bg-navy-60 cursor-pointer"
-      onClick={handleClickNavigate}
-    >
-      <td className="text-base text-white-5 px-6">{event.hirer}</td>
-      <td className="text-base text-white-5 px-6">
+    <TableRow onClick={handleClickNavigate}>
+      <TableTdContent>{event.hirer}</TableTdContent>
+      <TableTdContent>
         <span>26/08/2025</span>
-      </td>
-      <td className="text-base text-white-5 px-6">
+      </TableTdContent>
+      <TableTdContent>
         <span className="capitalize">{event.eventType.type}</span>
-      </td>
-      <td className="text-base text-white-5 px-6">
+      </TableTdContent>
+      <TableTdContent>
         <span>70/100</span>
-      </td>
-      <td className="text-base text-white-5 px-6">
-        <span>Editar</span>
-      </td>
-    </tr>
+      </TableTdContent>
+    </TableRow>
   )
 }

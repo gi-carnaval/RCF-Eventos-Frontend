@@ -1,5 +1,6 @@
 import { usePopup } from '../../Hooks/usePopup'
 import RCFLogo from '../../assets/Logo-RCF-Eventos.png'
+import { Button } from '../atoms/Button'
 import CreateEventForm from '../molecules/CreateEventForm'
 
 export default function Header() {
@@ -23,15 +24,14 @@ export default function Header() {
         <h1 className="px-6 font-bold text-2xl">Eventos</h1>
       </div>
       <div className="flex justify-start items-center">
-        <a
+        <Button
           onClick={() => {
             openPopup()
             applyContent(popupContent)
           }}
-          className="bg-navy-20 rounded-3xl h-12 flex justify-center items-center px-5 cursor-pointer"
         >
-          Adicionar Novo Evento
-        </a>
+          Adicionar novo Evento
+        </Button>
       </div>
     </header>
   )

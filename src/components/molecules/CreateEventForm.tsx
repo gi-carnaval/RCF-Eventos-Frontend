@@ -7,7 +7,7 @@ import eventRepository from '../../repositories/EventRepository'
 import Input from '../atoms/Input'
 import { useForm } from 'react-hook-form'
 import InputErrorMessage from '../atoms/InputErrorMessage'
-import ConfirmFormButton from '../atoms/ConfirmFormButton'
+import { Button } from '../atoms/Button'
 
 interface FormData {
   hirer: string
@@ -100,7 +100,7 @@ export default function CreateEventForm() {
           Cadastrar novo tipo de evento
         </span>
       </div>
-      <ConfirmFormButton onClick={() => handleSubmit(onSubmit)()} />
+      <Button onClick={() => handleSubmit(onSubmit)()}>Adicionar</Button>
     </form>
   )
 }

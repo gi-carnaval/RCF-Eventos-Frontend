@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import Input from '../atoms/Input'
-import ConfirmFormButton from '../atoms/ConfirmFormButton'
+import { Button } from '../atoms/Button'
 import appointmentRepository from '@/src/repositories/AppointmentRepository'
 import InputErrorMessage from '../atoms/InputErrorMessage'
 
@@ -88,7 +88,7 @@ export default function CreateAppointmentForm({
           )}
         </div>
       </div>
-      <ConfirmFormButton onClick={() => handleSubmit(onSubmit)()} />
+      <Button onClick={() => handleSubmit(onSubmit)()}>Adicionar</Button>
     </>
   )
 }

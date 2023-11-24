@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { api } from '../../lib/axios'
 import EventRow from '../molecules/EventRow'
 import EmptyRowEvent from '../molecules/EmptyRowEvent'
+import TableTh from '../atoms/TableTh'
 
 export interface EventsProps {
   id: string
@@ -31,11 +32,10 @@ export default function EventsTable() {
     <table className="w-full">
       <thead>
         <tr>
-          <td className="text-gray-70">Contratante(s)</td>
-          <td className="text-gray-70">Data Evento Principal</td>
-          <td className="text-gray-70">Tipo de Evento</td>
-          <td className="text-gray-70">Status</td>
-          <td className="text-gray-70">Ações</td>
+          <TableTh>Contratante(s)</TableTh>
+          <TableTh>Data Evento Principal</TableTh>
+          <TableTh>Tipo de Evento</TableTh>
+          <TableTh>Status</TableTh>
         </tr>
       </thead>
       <tbody>
