@@ -1,15 +1,26 @@
 import { api } from '../lib/axios'
-import { AppointmentProps } from '../types/event'
+import {
+  CreateAppointmentProps,
+  FullAppointmentProps,
+} from '../types/appointment'
 
-interface CreateAppointmentProps {
-  appointmentData: AppointmentProps
+interface AppointmentProps {
+  appointmentData: CreateAppointmentProps
   eventId?: string
+}
+
+async function getAppointmentById(id: string | undefined) {
+  return await api.get<FullAppointmentProps>(`/appointment/${id}`)
+}
+
+async function deleteAppointment(id: string | undefined) {
+  await api.delete(`/appointment/${id}`)
 }
 
 async function createAppointment({
   appointmentData,
   eventId,
-}: CreateAppointmentProps) {
+}: AppointmentProps) {
   return await api.post(`/appointment`, {
     appointmentTitle: appointmentData.appointmentTitle,
     appointmentDate: appointmentData.date,
@@ -20,7 +31,9 @@ async function createAppointment({
 }
 
 const appointmentRepository = {
+  getAppointmentById,
   createAppointment,
+  deleteAppointment,
 }
 
 export default appointmentRepository

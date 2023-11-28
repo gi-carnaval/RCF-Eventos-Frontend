@@ -1,16 +1,14 @@
-export interface AppointmentProps {
-  appointmentTitle: string
-  date: string
-  dayOfWeek?: string
-  eventId?: string
-  id?: string
-  locale: string
-  time: string
-}
+import { FullAppointmentProps } from './appointment'
 
 export interface IEvent {
   id?: string
   hirer: string
   eventType: string
-  Appointment?: AppointmentProps[]
+  appointment?: FullAppointmentProps[]
+  photograficRegister: {
+    id: string
+    professionalQuantity: string
+    photoAverage: string
+    value: number
+  }
 }
