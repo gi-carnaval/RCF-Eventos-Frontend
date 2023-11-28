@@ -1,17 +1,5 @@
 import { UseFormRegisterReturn } from 'react-hook-form'
-import { tv, VariantProps } from 'tailwind-variants'
-
-const inputClasses = tv({
-  base: 'flex flex-col',
-  variants: {
-    inputSize: {
-      default: 'w-full',
-      '25%': 'w-1/4',
-      '50%': 'w-2/4',
-      '75%': 'w-3/4',
-    },
-  },
-})
+import { twMerge } from 'tailwind-merge'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string
@@ -19,23 +7,24 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   register: UseFormRegisterReturn<string>
   messageError?: string
   isRequired?: boolean
+  active?: boolean
 }
-
-type combinedTypes = InputProps & VariantProps<typeof inputClasses>
 
 export default function Input({
   labelName,
+  active = true,
+  className,
   register,
-  inputSize,
   ...props
-}: combinedTypes) {
+}: InputProps) {
   return (
-    <div className={inputClasses({ inputSize })}>
+    <div className={twMerge('flex flex-col', className)}>
       <label htmlFor={props.id} className="text-sm text-gray-50 mb-2">
         {labelName}
       </label>
       <input
-        className="w- text-gray-70 bg-navy-60 px-5 py-2 rounded-lg border-[1px] border-gray-100"
+        data-active={active}
+        className="text-gray-70 bg-navy-60 px-5 py-2 rounded-lg border-[1px] border-gray-100 data-[active=false]:brightness-75 data-[active=false]:cursor-not-allowed"
         {...props}
         {...register}
       />

@@ -1,7 +1,7 @@
 import { ThHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export default function TableTh({
+export function TableTh({
   className,
   ...props
 }: React.DetailedHTMLProps<

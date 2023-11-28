@@ -4,7 +4,7 @@ export function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
       {...props}
       className="bg-navy-20 rounded-3xl h-12 flex justify-center items-center px-5"
     >
-      {props.children}
+      <span>{props.children}</span>
     </button>
   )
 }
