@@ -1,7 +1,7 @@
 import { usePopup } from '../../Hooks/usePopup'
 import RCFLogo from '../../assets/Logo-RCF-Eventos.png'
 import { Button } from '../atoms/Button'
-import CreateEventForm from '../molecules/CreateEventForm'
+import CreateEventForm from '../molecules/EventCreateForm'
 
 export default function Header() {
   const { openPopup, applyContent } = usePopup()

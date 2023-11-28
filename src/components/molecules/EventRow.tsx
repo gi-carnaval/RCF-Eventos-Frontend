@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { EventsProps } from '../template/EventsTable'
-import TableRow from '../atoms/TableTr'
-import TableTdContent from '../atoms/TableTdContent'
+import { TableTr } from '../atoms/TableTr'
+import { TableTdContent } from '../atoms/TableTdContent'
 
 interface EventRowProps {
   event: EventsProps
@@ -15,7 +15,7 @@ export default function EventRow({ event }: EventRowProps) {
   }
 
   return (
-    <TableRow onClick={handleClickNavigate}>
+    <TableTr onClick={handleClickNavigate}>
       <TableTdContent>{event.hirer}</TableTdContent>
       <TableTdContent>
         <span>26/08/2025</span>
@@ -26,6 +26,6 @@ export default function EventRow({ event }: EventRowProps) {
       <TableTdContent>
         <span>70/100</span>
       </TableTdContent>
-    </TableRow>
+    </TableTr>
   )
 }
