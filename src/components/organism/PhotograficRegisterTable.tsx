@@ -7,10 +7,13 @@ import { TableTr } from '../atoms/TableTr'
 import { ButtonHoverIcon } from '../atoms/ButtonHoverIcon'
 import { LuPencil } from 'react-icons/lu'
 import { usePopup } from '@/src/Hooks/usePopup'
-import { PhotograficRegisterForm } from '../molecules/PhotograficRegisterForm'
+import { PhotographicRegisterCreateForm } from '../molecules/PhotographicRegisterCreateForm'
+import { PhotographicRegisterEditForm } from '../molecules/PhotographicRegisterEditForm'
+import { PhotographicRegisterProps } from '@/src/types/event'
 
-interface PhotograficRegisterTableProps {
-  photograficRegister?: {
+interface PhotographicRegisterTableProps {
+  eventId?: string
+  photographicRegister?: {
     id: string
     professionalQuantity: string
     photoAverage: string
@@ -18,26 +21,36 @@ interface PhotograficRegisterTableProps {
   }
 }
 
-export function PhotograficRegisterTable({
-  photograficRegister,
-}: PhotograficRegisterTableProps) {
+export function PhotographicRegisterTable({
+  photographicRegister,
+  eventId,
+}: PhotographicRegisterTableProps) {
   const { openPopup, applyContent } = usePopup()
 
-  console.log('Dentro do Registro: ', photograficRegister)
+  console.log('Dentro do Registro: ', photographicRegister)
 
-  const editPhotograficRegisterPopupContent = {
-    title: 'Adicionar Dados',
-    content: <PhotograficRegisterForm />,
+  function createPhotographicRegister(eventId: string | undefined) {
+    const createPhotographicRegisterPopupContent = {
+      title: 'Adicionar Dados',
+      content: <PhotographicRegisterCreateForm eventId={eventId} />,
+    }
+    openPopup()
+    applyContent(createPhotographicRegisterPopupContent)
   }
-
-  // function editAppointment(appointmentId: string) {
-  //   const editAppointmentPopupContent = {
-  //     title: 'Editar Compromisso',
-  //     content: <EditAppointmentForm appointmentId={appointmentId} />,
-  //   }
-  //   openPopup()
-  //   applyContent(editAppointmentPopupContent)
-  // }
+  function editPhotographicRegister(
+    photographicRegister: PhotographicRegisterProps,
+  ) {
+    const editPhotographicRegisterPopupContent = {
+      title: 'Adicionar Dados',
+      content: (
+        <PhotographicRegisterEditForm
+          photographicRegister={photographicRegister}
+        />
+      ),
+    }
+    openPopup()
+    applyContent(editPhotographicRegisterPopupContent)
+  }
 
   return (
     <div className="w-full flex flex-row justify-center items-end gap-6">
@@ -49,38 +62,47 @@ export function PhotograficRegisterTable({
           <TableTh>Média de Fotos</TableTh>
           <TableTh>Valor</TableTh>
         </TableThead>
-        <tbody>
-          <TableTr>
-            <TableTdContent>
-              <div className="w-8 h-8 bg-navy-20 flex justify-center items-center rounded-sm">
-                <FaCheck className="h-5 w-5" />
-              </div>
-            </TableTdContent>
-            <TableTdContent>3</TableTdContent>
-            <TableTdContent>1200</TableTdContent>
-            <TableTdContent>1700</TableTdContent>
-          </TableTr>
-        </tbody>
+        {photographicRegister ? (
+          <tbody>
+            <TableTr>
+              <TableTdContent>
+                <div className="w-8 h-8 bg-navy-20 flex justify-center items-center rounded-sm">
+                  <FaCheck className="h-5 w-5" />
+                </div>
+              </TableTdContent>
+              <TableTdContent>
+                {photographicRegister.professionalQuantity}
+              </TableTdContent>
+              <TableTdContent>
+                {photographicRegister.photoAverage}
+              </TableTdContent>
+              <TableTdContent>
+                {photographicRegister.value.toLocaleString('pt-br', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </TableTdContent>
+            </TableTr>
+          </tbody>
+        ) : null}
       </table>
-      {photograficRegister === undefined ? (
-        <ButtonHoverIcon
-          icon={<FaPlus />}
-          onClick={() => {
-            openPopup()
-            applyContent(editPhotograficRegisterPopupContent)
-          }}
-        >
-          Adicionar
-        </ButtonHoverIcon>
-      ) : (
+      {photographicRegister ? (
         <ButtonHoverIcon
           icon={<LuPencil />}
           onClick={() => {
-            // openPopup()
-            // applyContent(addAppointmentPopupContent)
+            editPhotographicRegister(photographicRegister)
           }}
         >
           Editar
+        </ButtonHoverIcon>
+      ) : (
+        <ButtonHoverIcon
+          icon={<FaPlus />}
+          onClick={() => {
+            createPhotographicRegister(eventId)
+          }}
+        >
+          Adicionar
         </ButtonHoverIcon>
       )}
     </div>
