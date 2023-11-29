@@ -6,10 +6,10 @@ export default function RegularPopup() {
   return isPopupOpen ? (
     <>
       <div
-        className="overflow-y-auto overflow-x-hidden fixed flex top-0 right-0 left-0 z-0 justify-center items-center w-screen md:inset-0 h-[calc(100%)] max-h-full bg-black/50"
+        className="overflow-y-auto overflow-x-hidden fixed flex top-0 right-0 left-0 z-20 justify-center items-center w-screen md:inset-0 h-[calc(100%)] max-h-full bg-black/50"
         onClick={closePopup}
       ></div>
-      <div className="fixed p-4 w-[46rem] max-w-2xl max-h-full top-[calc(100%_-_42rem)] left-[calc(50vw_-_21rem)]">
+      <div className="fixed p-4 w-[46rem] max-w-2xl max-h-full top-[calc(100%_-_42rem)] left-[calc(50vw_-_21rem)] z-30">
         <div className="relative rounded-lg shadow bg-navy-90 p-6">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-xl font-semibold text-white-5 dark:text-white">
