@@ -49,8 +49,10 @@ export function EditAppointmentForm({
   // }
 
   async function excludeAppointment() {
-    await appointmentRepository.deleteAppointment(appointmentId)
-    closePopup()
+    if (confirm('Confirmar exclusão do compromisso?')) {
+      await appointmentRepository.deleteAppointment(appointmentId)
+      closePopup()
+    }
   }
 
   useEffect(() => {

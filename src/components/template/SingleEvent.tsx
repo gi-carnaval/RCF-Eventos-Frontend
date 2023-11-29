@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { IEvent } from '../../types/event'
 import AppointmentTable from '../organism/AppointmentTable'
 import { usePopup } from '@/src/Hooks/usePopup'
-import { PhotograficRegisterTable } from '../organism/PhotograficRegisterTable'
+import { PhotographicRegisterTable } from '../organism/PhotograficRegisterTable'
 
 type ParamsProps = {
   id: string
@@ -46,11 +46,23 @@ export default function SingleEvent() {
       </div>
       <div className="flex flex-col justify-center items-center gap-6 pb-24">
         <div className="w-4/5 flex flex-col px-40 py-12 items-center">
-          <PhotograficRegisterTable
-            photograficRegister={event?.photograficRegister}
+          <PhotographicRegisterTable
+            photographicRegister={event?.photographicRegister}
+            eventId={event?.id}
           />
         </div>
       </div>
+      <footer className="absolute left-0 z-10 w-full h-24 bg-navy-60 border-t-2 border-navy-40">
+        <div className="w-full h-full flex flex-row justify-end items-center p-6">
+          <span>
+            Valor Total:{' '}
+            {event?.photographicRegister?.value.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </span>
+        </div>
+      </footer>
     </>
   )
 }
