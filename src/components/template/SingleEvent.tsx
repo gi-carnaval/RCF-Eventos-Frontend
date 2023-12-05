@@ -5,6 +5,10 @@ import { IEvent } from '../../types/event'
 import AppointmentTable from '../organism/AppointmentTable'
 import { usePopup } from '@/src/Hooks/usePopup'
 import { PhotographicRegisterTable } from '../organism/PhotograficRegisterTable'
+import { SingleEventFooter } from '../organism/SingleEventFooter'
+import { AlbumTable } from '../organism/AlbumTable'
+import { getEventTotalValue } from '@/src/lib/functions'
+import { Button } from '../atoms/Button'
 
 type ParamsProps = {
   id: string
@@ -28,6 +32,26 @@ export default function SingleEvent() {
     !isPopupOpen && id && fetchEventData(id)
   }, [id, isPopupOpen])
 
+  const eventTotalValue = getEventTotalValue({
+    photographicRegisterValue: event?.photographicRegister?.value,
+    albumValue: event?.album?.value,
+  })
+
+  async function generateReport() {
+    try {
+      const response = await eventRepository.getEventReport(id)
+      console.log('Response: ', response)
+      const blob = new Blob([response.data], { type: 'application/pdf' })
+      console.log('Blob: ', blob)
+
+      const url = window.URL.createObjectURL(blob)
+      window.open(url, '_blank')
+      window.URL.revokeObjectURL(url)
+    } catch (error) {
+      console.error('Error downloading PDF:', error)
+    }
+  }
+
   return (
     <>
       <div className="flex justify-start pb-24">
@@ -44,25 +68,21 @@ export default function SingleEvent() {
       <div className="flex flex-col justify-center items-center gap-6">
         <AppointmentTable id={id} appointments={event?.appointment} />
       </div>
-      <div className="flex flex-col justify-center items-center gap-6 pb-24">
-        <div className="w-4/5 flex flex-col px-40 py-12 items-center">
+      <div className="flex flex-col justify-center items-center gap-6 mb-12">
+        <div className="w-4/5 flex flex-col px-40 items-center">
           <PhotographicRegisterTable
             photographicRegister={event?.photographicRegister}
             eventId={event?.id}
           />
         </div>
       </div>
-      <footer className="absolute left-0 z-10 w-full h-24 bg-navy-60 border-t-2 border-navy-40">
-        <div className="w-full h-full flex flex-row justify-end items-center p-6">
-          <span>
-            Valor Total:{' '}
-            {event?.photographicRegister?.value.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            })}
-          </span>
+      <div className="flex flex-col justify-center items-center gap-6 mb-12">
+        <div className="w-4/5 flex flex-col px-40 items-center">
+          <AlbumTable albumDatas={event?.album} eventId={event?.id} />
         </div>
-      </footer>
+      </div>
+      <Button onClick={generateReport}>Gerar Contrato</Button>
+      <SingleEventFooter totalValue={eventTotalValue} />
     </>
   )
 }
