@@ -44,7 +44,6 @@ export function EditAppointmentForm({
   appointment && setValue('time', appointment?.time)
 
   async function onSubmit(data: FormData) {
-    console.log('Datas a serem enviadas no Edit Compromisso: ', data)
     await appointmentRepository.updateAppointment(data, appointmentId)
     closePopup()
   }

@@ -40,7 +40,6 @@ export function PhotographicRegisterEditForm({
       photoAverage: data.photoAverage,
       value: data.value,
     }
-    console.log('Dados a serem enviados: ', photographicRegisterData)
     await photographicRegisterRepository.updatePhotographicRegister(
       photographicRegisterData,
     )

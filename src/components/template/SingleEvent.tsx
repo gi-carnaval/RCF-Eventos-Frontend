@@ -27,7 +27,6 @@ export default function SingleEvent() {
       setEvent(res.data)
     }
   }
-  console.log('Entrou na Página Single Event com os Compromissos: ', event)
   useEffect(() => {
     !isPopupOpen && id && fetchEventData(id)
   }, [id, isPopupOpen])
@@ -40,15 +39,13 @@ export default function SingleEvent() {
   async function generateReport() {
     try {
       const response = await eventRepository.getEventReport(id)
-      console.log('Response: ', response)
       const blob = new Blob([response.data], { type: 'application/pdf' })
-      console.log('Blob: ', blob)
 
       const url = window.URL.createObjectURL(blob)
       window.open(url, '_blank')
       window.URL.revokeObjectURL(url)
     } catch (error) {
-      console.error('Error downloading PDF:', error)
+      alert('Error downloading PDF')
     }
   }
 

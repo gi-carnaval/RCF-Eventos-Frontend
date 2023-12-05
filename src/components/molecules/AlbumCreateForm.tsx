@@ -32,7 +32,6 @@ export function AlbumCreateForm({ eventId }: AlbumCreateFormProps) {
       value: data.value,
       eventId,
     }
-    console.log('Data dentro do Album Create: ', data)
     await eventRepository.createEventAlbum(albumData)
     closePopup()
   }

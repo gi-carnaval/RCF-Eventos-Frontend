@@ -27,8 +27,6 @@ export function PhotographicRegisterTable({
 }: PhotographicRegisterTableProps) {
   const { openPopup, applyContent } = usePopup()
 
-  console.log('Dentro do Registro: ', photographicRegister)
-
   function createPhotographicRegister(eventId: string | undefined) {
     const createPhotographicRegisterPopupContent = {
       title: 'Adicionar Dados',

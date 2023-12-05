@@ -31,7 +31,6 @@ export default function EventsTable() {
   useEffect(() => {
     fetchEvents()
   }, [isPopupOpen])
-  console.log(events.length > 0)
   return events.length !== 0 ? (
     <table className="w-full">
       <TableThead>
