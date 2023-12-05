@@ -33,7 +33,7 @@ export function EditAppointmentForm({
 
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors },
     setValue,
   } = useForm<FormData>()
@@ -42,11 +42,12 @@ export function EditAppointmentForm({
   appointment && setValue('date', dayjs(appointment?.date).format('YYYY-MM-DD'))
   appointment && setValue('locale', appointment?.locale)
   appointment && setValue('time', appointment?.time)
-  // async function onSubmit(id: FormData) {
-  //   await appointmentRepository.getAppointmentById({
-  //     appointmentData,
-  //   })
-  // }
+
+  async function onSubmit(data: FormData) {
+    console.log('Datas a serem enviadas no Edit Compromisso: ', data)
+    await appointmentRepository.updateAppointment(data, appointmentId)
+    closePopup()
+  }
 
   async function excludeAppointment() {
     if (confirm('Confirmar exclusão do compromisso?')) {
@@ -109,8 +110,10 @@ export function EditAppointmentForm({
           )}
         </div>
       </div>
-      {/* <Button onClick={() => handleSubmit(onSubmit)()}>Adicionar</Button> */}
-      <Button onClick={excludeAppointment}>Excluir</Button>
+      <div className="flex gap-6 flex-row justify-center">
+        <Button onClick={() => handleSubmit(onSubmit)()}>Atualizar</Button>
+        <Button onClick={excludeAppointment}>Excluir</Button>
+      </div>
     </>
   )
 }

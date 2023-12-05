@@ -5,7 +5,7 @@ import { usePopup } from '@/src/Hooks/usePopup'
 import InputErrorMessage from '../atoms/InputErrorMessage'
 import eventRepository from '@/src/repositories/EventRepository'
 import { PhotographicRegisterProps } from '@/src/types/event'
-import { photographicRegisterRepository } from '@/src/repositories/PhotographicRegister'
+import { photographicRegisterRepository } from '@/src/repositories/PhotographicRegisterRepository'
 
 interface FormProps {
   professionalQuantity: string
@@ -35,13 +35,13 @@ export function PhotographicRegisterEditForm({
 
   async function onSubmit(data: FormProps) {
     const photographicRegisterData = {
+      id: photographicRegister.id,
       professionalQuantity: data.professionalQuantity,
       photoAverage: data.photoAverage,
       value: data.value,
-      photographicRegister,
     }
     console.log('Dados a serem enviados: ', photographicRegisterData)
-    await eventRepository.createEventPhotographicRegister(
+    await photographicRegisterRepository.updatePhotographicRegister(
       photographicRegisterData,
     )
     closePopup()
@@ -49,7 +49,7 @@ export function PhotographicRegisterEditForm({
 
   async function deletePhotographicRegister(photographicRegisterId: string) {
     if (confirm('Confirmar exclusão do Registro Fotográfico?')) {
-      await photographicRegisterRepository.deletePhotographicRegister(
+      await eventRepository.deleteEventPhotographicRegister(
         photographicRegisterId,
       )
       closePopup()
