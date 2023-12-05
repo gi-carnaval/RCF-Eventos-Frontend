@@ -1,3 +1,4 @@
+import { FullAlbumProps } from './album'
 import { FullAppointmentProps } from './appointment'
 
 export interface CreatePhotographicRegisterProps {
@@ -19,4 +20,5 @@ export interface IEvent {
   eventType: string
   appointment?: FullAppointmentProps[]
   photographicRegister?: PhotographicRegisterProps
+  album?: FullAlbumProps
 }

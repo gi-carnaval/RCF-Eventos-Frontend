@@ -30,10 +30,27 @@ async function createAppointment({
   })
 }
 
+async function updateAppointment(
+  updateAppointmentData: CreateAppointmentProps,
+  id: string,
+) {
+  const updatedAppointmentData = {
+    appointmentTitle: updateAppointmentData.appointmentTitle,
+    appointmentDate: updateAppointmentData.date,
+    appointmentLocale: updateAppointmentData.locale,
+    appointmentTime: updateAppointmentData.time,
+  }
+
+  await api.put(`/appointment/${id}`, {
+    ...updatedAppointmentData,
+  })
+}
+
 const appointmentRepository = {
   getAppointmentById,
   createAppointment,
   deleteAppointment,
+  updateAppointment,
 }
 
 export default appointmentRepository

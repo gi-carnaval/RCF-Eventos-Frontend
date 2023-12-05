@@ -8,6 +8,14 @@ export interface FullAppointmentProps {
   time: string
 }
 
+export interface UpdateAppointmentProps {
+  id: string
+  appointmentTitle: string
+  date: string
+  locale: string
+  time: string
+}
+
 export interface CreateAppointmentProps {
   appointmentTitle: string
   date: string
