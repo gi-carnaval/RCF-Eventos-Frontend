@@ -1,3 +1,5 @@
+import eventRepository from '../repositories/EventRepository'
+
 interface GetEventTotalValueProps {
   photographicRegisterValue?: number
   albumValue?: number
@@ -21,4 +23,17 @@ export function getEventTotalValue({
     panelValue
 
   return eventTotalValue
+}
+
+export async function generateReport(id: string | undefined) {
+  try {
+    const response = await eventRepository.getEventReport(id)
+    const blob = new Blob([response.data], { type: 'application/pdf' })
+
+    const url = window.URL.createObjectURL(blob)
+    window.open(url, '_blank')
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    alert('Error downloading PDF')
+  }
 }

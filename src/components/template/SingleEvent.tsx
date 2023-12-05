@@ -8,7 +8,6 @@ import { PhotographicRegisterTable } from '../organism/PhotograficRegisterTable'
 import { SingleEventFooter } from '../organism/SingleEventFooter'
 import { AlbumTable } from '../organism/AlbumTable'
 import { getEventTotalValue } from '@/src/lib/functions'
-import { Button } from '../atoms/Button'
 
 type ParamsProps = {
   id: string
@@ -36,19 +35,6 @@ export default function SingleEvent() {
     albumValue: event?.album?.value,
   })
 
-  async function generateReport() {
-    try {
-      const response = await eventRepository.getEventReport(id)
-      const blob = new Blob([response.data], { type: 'application/pdf' })
-
-      const url = window.URL.createObjectURL(blob)
-      window.open(url, '_blank')
-      window.URL.revokeObjectURL(url)
-    } catch (error) {
-      alert('Error downloading PDF')
-    }
-  }
-
   return (
     <>
       <div className="flex justify-start pb-24">
@@ -62,24 +48,17 @@ export default function SingleEvent() {
         </span>
       </div>
       <h1 className="text-2xl font-bold text-center">{event?.hirer}</h1>
-      <div className="flex flex-col justify-center items-center gap-6">
+      <div className="flex flex-col justify-center items-center gap-16">
         <AppointmentTable id={id} appointments={event?.appointment} />
-      </div>
-      <div className="flex flex-col justify-center items-center gap-6 mb-12">
-        <div className="w-4/5 flex flex-col px-40 items-center">
+        <div className="w-4/5 flex flex-col px-40 items-center gap-16 mb-24">
           <PhotographicRegisterTable
             photographicRegister={event?.photographicRegister}
             eventId={event?.id}
           />
-        </div>
-      </div>
-      <div className="flex flex-col justify-center items-center gap-6 mb-12">
-        <div className="w-4/5 flex flex-col px-40 items-center">
           <AlbumTable albumDatas={event?.album} eventId={event?.id} />
         </div>
       </div>
-      <Button onClick={generateReport}>Gerar Contrato</Button>
-      <SingleEventFooter totalValue={eventTotalValue} />
+      <SingleEventFooter totalValue={eventTotalValue} eventId={id} />
     </>
   )
 }

@@ -4,12 +4,12 @@ import dayjs from 'dayjs'
 import { FullAppointmentProps } from '@/src/types/appointment'
 import { TableTr } from '../atoms/TableTr'
 import { TableThead } from '../atoms/TableThead'
-import { TableCaption } from '../atoms/TableCaption'
 import { TableTdContent } from '../atoms/TableTdContent'
 import { ButtonHoverIcon } from '../atoms/ButtonHoverIcon'
 import { CreateAppointmentForm } from '../molecules/AppointmentCreateForm'
 import { TableTh } from '../atoms/TableTh'
 import { FaPlus } from 'react-icons/fa'
+import { TableTitle } from '../atoms/TableTitle'
 
 interface AppointmentTableProps {
   id?: string
@@ -37,9 +37,10 @@ export default function AppointmentTable({
   }
 
   return (
-    <div className="w-full flex flex-col px-40 py-12 items-center">
+    <div className="w-full flex flex-col px-40 pt-12 items-center">
+      <TableTitle>Compromissos</TableTitle>
+
       <table className="w-full border border-navy-40">
-        <TableCaption>Compromissos</TableCaption>
         <TableThead>
           <TableTh>Título</TableTh>
           <TableTh>Data</TableTh>

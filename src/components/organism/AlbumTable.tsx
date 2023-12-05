@@ -1,6 +1,6 @@
 import { LuPencil } from 'react-icons/lu'
 import { ButtonHoverIcon } from '../atoms/ButtonHoverIcon'
-import { TableCaption } from '../atoms/TableCaption'
+import { TableTitle } from '../atoms/TableTitle'
 import { TableTdContent } from '../atoms/TableTdContent'
 import { TableTh } from '../atoms/TableTh'
 import { TableThead } from '../atoms/TableThead'
@@ -38,56 +38,58 @@ export function AlbumTable({ albumDatas, eventId }: AlbumTableProps) {
   }
 
   return (
-    <div className="w-full flex flex-row justify-center items-end gap-6">
-      <table className="w-full border border-navy-40">
-        <TableCaption>Album Encadernado</TableCaption>
-        <TableThead>
-          <TableTh>Ativo</TableTh>
-          <TableTh>Tamanho do Albúm</TableTh>
-          <TableTh>Qtd de Páginas</TableTh>
-          <TableTh>Capa</TableTh>
-          <TableTh>Valor</TableTh>
-        </TableThead>
+    <div className="w-full flex flex-col justify-center items-center gap-6">
+      <TableTitle>Album Encadernado</TableTitle>
+      <div className="w-full flex flex-row gap-6">
+        <table className="w-full border border-navy-40">
+          <TableThead>
+            <TableTh>Ativo</TableTh>
+            <TableTh>Tamanho do Albúm</TableTh>
+            <TableTh>Qtd de Páginas</TableTh>
+            <TableTh>Capa</TableTh>
+            <TableTh>Valor</TableTh>
+          </TableThead>
+          {albumDatas ? (
+            <tbody>
+              <TableTr>
+                <TableTdContent>
+                  <div className="w-8 h-8 bg-navy-20 flex justify-center items-center rounded-sm">
+                    <FaCheck className="h-5 w-5" />
+                  </div>
+                </TableTdContent>
+                <TableTdContent>{albumDatas.size}</TableTdContent>
+                <TableTdContent>{albumDatas.pages}</TableTdContent>
+                <TableTdContent>{albumDatas?.albumCover}</TableTdContent>
+                <TableTdContent>
+                  {albumDatas.value.toLocaleString('pt-br', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </TableTdContent>
+              </TableTr>
+            </tbody>
+          ) : null}
+        </table>
         {albumDatas ? (
-          <tbody>
-            <TableTr>
-              <TableTdContent>
-                <div className="w-8 h-8 bg-navy-20 flex justify-center items-center rounded-sm">
-                  <FaCheck className="h-5 w-5" />
-                </div>
-              </TableTdContent>
-              <TableTdContent>{albumDatas.size}</TableTdContent>
-              <TableTdContent>{albumDatas.pages}</TableTdContent>
-              <TableTdContent>{albumDatas?.albumCover}</TableTdContent>
-              <TableTdContent>
-                {albumDatas.value.toLocaleString('pt-br', {
-                  style: 'currency',
-                  currency: 'BRL',
-                })}
-              </TableTdContent>
-            </TableTr>
-          </tbody>
-        ) : null}
-      </table>
-      {albumDatas ? (
-        <ButtonHoverIcon
-          icon={<LuPencil />}
-          onClick={() => {
-            editAlbum(albumDatas)
-          }}
-        >
-          Editar
-        </ButtonHoverIcon>
-      ) : (
-        <ButtonHoverIcon
-          icon={<FaPlus />}
-          onClick={() => {
-            createAlbum(eventId)
-          }}
-        >
-          Adicionar
-        </ButtonHoverIcon>
-      )}
+          <ButtonHoverIcon
+            icon={<LuPencil />}
+            onClick={() => {
+              editAlbum(albumDatas)
+            }}
+          >
+            Editar
+          </ButtonHoverIcon>
+        ) : (
+          <ButtonHoverIcon
+            icon={<FaPlus />}
+            onClick={() => {
+              createAlbum(eventId)
+            }}
+          >
+            Adicionar
+          </ButtonHoverIcon>
+        )}
+      </div>
     </div>
   )
 }
