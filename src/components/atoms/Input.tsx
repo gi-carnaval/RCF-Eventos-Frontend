@@ -2,7 +2,6 @@ import { UseFormRegisterReturn } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  id: string
   labelName: string
   register: UseFormRegisterReturn<string>
   messageError?: string
