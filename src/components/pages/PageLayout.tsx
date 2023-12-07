@@ -14,7 +14,7 @@ export function PageLayout({ children }: LayoutProps) {
         <Header />
         <div className="flex w-full">
           <Sidebar />
-          <main className="absolute top-24 left-24 w-[calc(100%_-_6rem)] p-6 mb-6 z-0">
+          <main className="absolute top-24 left-48 w-[calc(100%_-_12rem)] p-6 mb-6 z-0">
             {children}
           </main>
           <RegularPopup />
