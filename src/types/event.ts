@@ -1,5 +1,8 @@
 import { FullAlbumProps } from './album'
 import { FullAppointmentProps } from './appointment'
+import { MakingOfProps } from './makingOf'
+import { PhotoPanelProps } from './photoPanel'
+import { PhotoShootProps } from './photoShoot'
 
 export interface CreatePhotographicRegisterProps {
   professionalQuantity: string
@@ -18,7 +21,11 @@ export interface IEvent {
   id?: string
   hirer: string
   eventType: string
+  valorTotal: number
   appointment?: FullAppointmentProps[]
   photographicRegister?: PhotographicRegisterProps
   album?: FullAlbumProps
+  makingOf?: MakingOfProps
+  photoShoot?: PhotoShootProps
+  photoPanel: PhotoPanelProps
 }
