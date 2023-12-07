@@ -3,7 +3,7 @@ import eventRepository from '../repositories/EventRepository'
 interface GetEventTotalValueProps {
   photographicRegisterValue?: number
   albumValue?: number
-  preWeddingValue?: number
+  photoShootValue?: number
   makingOfValue?: number
   panelValue?: number
 }
@@ -11,14 +11,14 @@ interface GetEventTotalValueProps {
 export function getEventTotalValue({
   photographicRegisterValue = 0,
   albumValue = 0,
-  preWeddingValue = 0,
+  photoShootValue = 0,
   makingOfValue = 0,
   panelValue = 0,
 }: GetEventTotalValueProps) {
   const eventTotalValue =
     photographicRegisterValue +
     albumValue +
-    preWeddingValue +
+    photoShootValue +
     makingOfValue +
     panelValue
 
