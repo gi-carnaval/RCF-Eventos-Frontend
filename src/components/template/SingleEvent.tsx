@@ -7,7 +7,9 @@ import { usePopup } from '@/src/Hooks/usePopup'
 import { PhotographicRegisterTable } from '../organism/PhotograficRegisterTable'
 import { SingleEventFooter } from '../organism/SingleEventFooter'
 import { AlbumTable } from '../organism/AlbumTable'
-import { getEventTotalValue } from '@/src/lib/functions'
+import { MakingOfTable } from '../organism/MakingOfTable'
+import { PhotoShootTable } from '../organism/PhotoShootTable'
+import { PhotoPanelTable } from '../organism/PhotoPanelTable'
 
 type ParamsProps = {
   id: string
@@ -30,11 +32,6 @@ export default function SingleEvent() {
     !isPopupOpen && id && fetchEventData(id)
   }, [id, isPopupOpen])
 
-  const eventTotalValue = getEventTotalValue({
-    photographicRegisterValue: event?.photographicRegister?.value,
-    albumValue: event?.album?.value,
-  })
-
   return (
     <>
       <div className="flex justify-start pb-24">
@@ -50,15 +47,31 @@ export default function SingleEvent() {
       <h1 className="text-2xl font-bold text-center">{event?.hirer}</h1>
       <div className="flex flex-col justify-center items-center gap-16">
         <AppointmentTable id={id} appointments={event?.appointment} />
-        <div className="w-4/5 flex flex-col px-40 items-center gap-16 mb-24">
+        <div className="w-full flex flex-col px-10 items-center gap-16 mb-24">
           <PhotographicRegisterTable
             photographicRegister={event?.photographicRegister}
             eventId={event?.id}
           />
-          <AlbumTable albumDatas={event?.album} eventId={event?.id} />
+          <div className="w-full flex flex-row gap-12">
+            <AlbumTable albumDatas={event?.album} eventId={event?.id} />
+            <MakingOfTable
+              makingOfDatas={event?.makingOf}
+              eventId={event?.id}
+            />
+          </div>
+          <div className="w-full flex flex-row gap-12">
+            <PhotoShootTable
+              photoShootDatas={event?.photoShoot}
+              eventId={event?.id}
+            />
+            <PhotoPanelTable
+              photoPanelDatas={event?.photoPanel}
+              eventId={event?.id}
+            />
+          </div>
         </div>
       </div>
-      <SingleEventFooter totalValue={eventTotalValue} eventId={id} />
+      <SingleEventFooter totalValue={event?.valorTotal} eventId={id} />
     </>
   )
 }

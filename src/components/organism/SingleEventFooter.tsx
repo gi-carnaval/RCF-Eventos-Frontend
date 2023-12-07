@@ -2,7 +2,7 @@ import { generateReport } from '@/src/lib/functions'
 import { Button } from '../atoms/Button'
 
 interface SingleEventFooterProps {
-  totalValue: number
+  totalValue?: number
   eventId?: string
 }
 
@@ -22,10 +22,11 @@ export function SingleEventFooter({
         </Button>
         <span>
           Valor Total:{' '}
-          {totalValue.toLocaleString('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
-          })}
+          {totalValue &&
+            totalValue.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
         </span>
       </div>
     </footer>

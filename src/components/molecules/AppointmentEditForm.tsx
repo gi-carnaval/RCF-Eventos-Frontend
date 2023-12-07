@@ -24,20 +24,31 @@ export function EditAppointmentForm({
   appointmentId,
 }: EditAppointmentFormProps) {
   const [appointment, setAppointment] = useState<FullAppointmentProps>()
+  const { closePopup } = usePopup()
 
   async function fetchAppointmentData(appointmentId: string) {
     const res = await appointmentRepository.getAppointmentById(appointmentId)
     setAppointment(res.data)
   }
-  const { closePopup } = usePopup()
+
+  useEffect(() => {
+    fetchAppointmentData(appointmentId)
+  }, [appointmentId])
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<FormData>()
-
+  } = useForm<FormData>({
+    defaultValues: {
+      appointmentTitle: appointment ? appointment.appointmentTitle : '',
+      date: appointment ? dayjs(appointment?.date).format('YYYY-MM-DD') : '',
+      locale: appointment?.locale,
+      time: appointment?.time,
+    },
+  })
+  console.log(appointment)
   appointment && setValue('appointmentTitle', appointment?.appointmentTitle)
   appointment && setValue('date', dayjs(appointment?.date).format('YYYY-MM-DD'))
   appointment && setValue('locale', appointment?.locale)
@@ -54,10 +65,6 @@ export function EditAppointmentForm({
       closePopup()
     }
   }
-
-  useEffect(() => {
-    fetchAppointmentData(appointmentId)
-  }, [appointmentId])
 
   return (
     <>
@@ -111,7 +118,9 @@ export function EditAppointmentForm({
       </div>
       <div className="flex gap-6 flex-row justify-center">
         <Button onClick={() => handleSubmit(onSubmit)()}>Atualizar</Button>
-        <Button onClick={excludeAppointment}>Excluir</Button>
+        <Button className="bg-red-700" onClick={excludeAppointment}>
+          Excluir
+        </Button>
       </div>
     </>
   )

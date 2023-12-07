@@ -29,7 +29,7 @@ export function PhotographicRegisterTable({
 
   function createPhotographicRegister(eventId: string | undefined) {
     const createPhotographicRegisterPopupContent = {
-      title: 'Adicionar Dados',
+      title: 'Adicionar Registro Fotográfico',
       content: <PhotographicRegisterCreateForm eventId={eventId} />,
     }
     openPopup()
@@ -39,7 +39,7 @@ export function PhotographicRegisterTable({
     photographicRegister: PhotographicRegisterProps,
   ) {
     const editPhotographicRegisterPopupContent = {
-      title: 'Adicionar Dados',
+      title: 'Editar Registro Fotográfico',
       content: (
         <PhotographicRegisterEditForm
           photographicRegister={photographicRegister}
