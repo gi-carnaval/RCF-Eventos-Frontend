@@ -21,7 +21,7 @@ export function AlbumTable({ albumDatas, eventId }: AlbumTableProps) {
 
   function createAlbum(eventId: string | undefined) {
     const createAlbumPopupContent = {
-      title: 'Adicionar Dados',
+      title: 'Adicionar Album',
       content: <AlbumCreateForm eventId={eventId} />,
     }
     openPopup()
@@ -30,7 +30,7 @@ export function AlbumTable({ albumDatas, eventId }: AlbumTableProps) {
 
   function editAlbum(album: FullAlbumProps) {
     const editPhotographicRegisterPopupContent = {
-      title: 'Adicionar Dados',
+      title: 'Editar Album',
       content: <AlbumEditForm albumDatas={album} />,
     }
     openPopup()

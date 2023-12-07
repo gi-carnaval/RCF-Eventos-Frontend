@@ -39,7 +39,7 @@ export function AlbumCreateForm({ eventId }: AlbumCreateFormProps) {
   return (
     <div className="flex flex-col gap-6 justify-center py-6">
       <div className="flex flex-row flex-wrap gap-6 items-end justify-center">
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Tamanho do Album"
@@ -53,7 +53,7 @@ export function AlbumCreateForm({ eventId }: AlbumCreateFormProps) {
             </InputErrorMessage>
           )}
         </div>
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Quantidade de Páginas"
@@ -66,7 +66,7 @@ export function AlbumCreateForm({ eventId }: AlbumCreateFormProps) {
             </InputErrorMessage>
           )}
         </div>
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Capa do Album"
@@ -74,7 +74,7 @@ export function AlbumCreateForm({ eventId }: AlbumCreateFormProps) {
             register={register('albumCover')}
           />
         </div>
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Valor"
@@ -89,7 +89,9 @@ export function AlbumCreateForm({ eventId }: AlbumCreateFormProps) {
           )}
         </div>
       </div>
-      <Button onClick={() => handleSubmit(onSubmit)()}>Adicionar</Button>
+      <div className="flex gap-6 flex-row justify-center">
+        <Button onClick={() => handleSubmit(onSubmit)()}>Adicionar</Button>
+      </div>
     </div>
   )
 }

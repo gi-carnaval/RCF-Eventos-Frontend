@@ -46,7 +46,7 @@ export function AlbumEditForm({ albumDatas }: AlbumEditFormProps) {
   }
 
   async function deleteAlbumDatas(albumDatasId: string) {
-    if (confirm('Confirmar exclusão do Registro Fotográfico?')) {
+    if (confirm('Confirmar exclusão do Album?')) {
       await eventRepository.deleteEventAlbum(albumDatasId)
       closePopup()
     }
@@ -55,7 +55,7 @@ export function AlbumEditForm({ albumDatas }: AlbumEditFormProps) {
   return (
     <div className="flex flex-col gap-6 justify-center">
       <div className="flex flex-row flex-wrap gap-6 items-end justify-center">
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Tamanho do Album"
@@ -69,7 +69,7 @@ export function AlbumEditForm({ albumDatas }: AlbumEditFormProps) {
             </InputErrorMessage>
           )}
         </div>
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Quantidade de Páginas"
@@ -82,7 +82,7 @@ export function AlbumEditForm({ albumDatas }: AlbumEditFormProps) {
             </InputErrorMessage>
           )}
         </div>
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Capa do Album"
@@ -90,7 +90,7 @@ export function AlbumEditForm({ albumDatas }: AlbumEditFormProps) {
             register={register('albumCover')}
           />
         </div>
-        <div className="w-2/4">
+        <div className="w-2/5">
           <Input
             className="w-full"
             labelName="Valor"
