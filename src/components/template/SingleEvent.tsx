@@ -10,6 +10,7 @@ import { AlbumTable } from '../organism/AlbumTable'
 import { MakingOfTable } from '../organism/MakingOfTable'
 import { PhotoShootTable } from '../organism/PhotoShootTable'
 import { PhotoPanelTable } from '../organism/PhotoPanelTable'
+import PaymentTable from '../organism/PaymentTable'
 
 type ParamsProps = {
   id: string
@@ -28,6 +29,9 @@ export default function SingleEvent() {
       setEvent(res.data)
     }
   }
+
+  console.log(event)
+
   useEffect(() => {
     !isPopupOpen && id && fetchEventData(id)
   }, [id, isPopupOpen])
@@ -69,9 +73,13 @@ export default function SingleEvent() {
               eventId={event?.id}
             />
           </div>
+          <PaymentTable
+            installments={event?.installments}
+            eventId={event?.id}
+          />
         </div>
       </div>
-      <SingleEventFooter totalValue={event?.valorTotal} eventId={id} />
+      <SingleEventFooter totalValue={event?.totalValue} eventId={id} />
     </>
   )
 }
