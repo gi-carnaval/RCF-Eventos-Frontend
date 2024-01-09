@@ -22,7 +22,7 @@ export interface IEvent {
   id?: string
   hirer: string
   eventType: string
-  totalValue: number
+  totalValue?: number
   appointment?: FullAppointmentProps[]
   photographicRegister?: PhotographicRegisterProps
   album?: FullAlbumProps

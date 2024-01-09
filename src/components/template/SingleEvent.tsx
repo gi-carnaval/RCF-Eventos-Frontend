@@ -11,6 +11,8 @@ import { MakingOfTable } from '../organism/MakingOfTable'
 import { PhotoShootTable } from '../organism/PhotoShootTable'
 import { PhotoPanelTable } from '../organism/PhotoPanelTable'
 import PaymentTable from '../organism/PaymentTable'
+import HirerEditForm from '../molecules/HirerEditForm'
+import { useForceRerender } from '@/src/Hooks/useForceRerender'
 
 type ParamsProps = {
   id: string
@@ -20,21 +22,28 @@ export default function SingleEvent() {
   const { id } = useParams<ParamsProps>()
   const [event, setEvent] = useState<IEvent>()
 
+  const { forceRerender, toggleForceRerender } = useForceRerender()
+
   const { isPopupOpen } = usePopup()
   const navigate = useNavigate()
 
   async function fetchEventData(eventId: string) {
-    const res = await eventRepository.getEventById(eventId)
-    if (res.data) {
-      setEvent(res.data)
+    try {
+      const res = await eventRepository.getEventById(eventId)
+      return res.data
+    } catch (error) {
+      console.error('Erro ao buscar evento:', error)
+      throw error
     }
   }
-
-  console.log(event)
-
   useEffect(() => {
-    !isPopupOpen && id && fetchEventData(id)
-  }, [id, isPopupOpen])
+    if (!isPopupOpen && id) {
+      fetchEventData(id).then((data) => {
+        setEvent(data)
+        toggleForceRerender()
+      })
+    }
+  }, [id, isPopupOpen, forceRerender])
 
   return (
     <>
@@ -48,7 +57,7 @@ export default function SingleEvent() {
           Voltar
         </span>
       </div>
-      <h1 className="text-2xl font-bold text-center">{event?.hirer}</h1>
+      <HirerEditForm hirer={event?.hirer} eventId={event?.id} />
       <div className="flex flex-col justify-center items-center gap-16">
         <AppointmentTable id={id} appointments={event?.appointment} />
         <div className="w-full flex flex-col px-10 items-center gap-16 mb-24">
@@ -75,6 +84,7 @@ export default function SingleEvent() {
           </div>
           <PaymentTable
             installments={event?.installments}
+            totalValue={event?.totalValue}
             eventId={event?.id}
           />
         </div>

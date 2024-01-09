@@ -13,6 +13,10 @@ async function createEvent(event: IEvent) {
   await api.post<IEvent>('/event', { ...event })
 }
 
+async function updateEventHirer(hirer: string, eventId: string) {
+  await api.put('/event/hirer/', { hirer, eventId })
+}
+
 async function getEventReport(eventId: string | undefined) {
   return await api.get(`/eventReport/pdf/${eventId}`, {
     responseType: 'arraybuffer',
@@ -79,6 +83,7 @@ async function deleteEventPhotoPanel(photoPanelId: string) {
 const eventRepository = {
   getEventById,
   createEvent,
+  updateEventHirer,
   getEventReport,
   createEventPhotographicRegister,
   deleteEventPhotographicRegister,
