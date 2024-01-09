@@ -37,3 +37,24 @@ export async function generateReport(id: string | undefined) {
     alert('Error downloading PDF')
   }
 }
+
+export function calcInstallments(
+  totalValue: number | undefined,
+  downPaymentValue: number,
+  InstallmentQuantity: number,
+): number {
+  if (
+    Number.isNaN(InstallmentQuantity) ||
+    InstallmentQuantity === 0 ||
+    Number.isNaN(downPaymentValue)
+  ) {
+    return 0
+  }
+  if (!totalValue) {
+    return 0
+  }
+  const restValue = totalValue - downPaymentValue
+  const restInstallmentsQuantity = InstallmentQuantity
+  const installmentValue = restValue / restInstallmentsQuantity
+  return Number.parseFloat(installmentValue.toFixed(2)) // Ajuste para duas casas decimais
+}

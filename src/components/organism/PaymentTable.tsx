@@ -1,44 +1,44 @@
 import { usePopup } from '@/src/Hooks/usePopup'
-import { EditAppointmentForm } from '../molecules/AppointmentEditForm'
 import dayjs from 'dayjs'
 import { TableTr } from '../atoms/TableTr'
 import { TableThead } from '../atoms/TableThead'
 import { TableTdContent } from '../atoms/TableTdContent'
 import { ButtonHoverIcon } from '../atoms/ButtonHoverIcon'
-import { CreateAppointmentForm } from '../molecules/AppointmentCreateForm'
 import { TableTh } from '../atoms/TableTh'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus, FaTrash } from 'react-icons/fa'
 import { TableTitle } from '../atoms/TableTitle'
 import { InstallmentsProps } from '@/src/types/installments'
+import { InstallmentCreateForm } from '../molecules/InstallmentCreateForm'
+import { InstallmentDeleteForm } from '../molecules/InstallmentDeleteForm'
 
 interface PaymentTableProps {
   eventId?: string
   installments?: InstallmentsProps[]
+  totalValue?: number
 }
 
 export default function PaymentTable({
   eventId,
   installments,
+  totalValue,
 }: PaymentTableProps) {
   const { openPopup, applyContent } = usePopup()
 
   const addAppointmentPopupContent = {
     title: 'Adicionar Pagamento',
-    content: <CreateAppointmentForm eventId={eventId} />,
+    content: (
+      <InstallmentCreateForm eventId={eventId} totalValue={totalValue} />
+    ),
   }
 
-  function editAppointment(appointmentId: string) {
-    const editAppointmentPopupContent = {
-      title: 'Editar Pagamento',
-      content: <EditAppointmentForm appointmentId={appointmentId} />,
-    }
-    openPopup()
-    applyContent(editAppointmentPopupContent)
+  const deleteAppointmentPopupContent = {
+    title: 'Excluir Todos os Pagamentos',
+    content: <InstallmentDeleteForm eventId={eventId} />,
   }
 
   return (
     <div className="w-full flex flex-col px-40 pt-12 items-center">
-      <TableTitle>Compromissos</TableTitle>
+      <TableTitle>Pagamentos</TableTitle>
 
       <table className="w-full border border-navy-40">
         <TableThead>
@@ -52,9 +52,7 @@ export default function PaymentTable({
             return (
               <TableTr
                 key={installment.id}
-                onClick={() => {
-                  editAppointment(installment.id)
-                }}
+                className="cursor-default hover:bg-transparent"
               >
                 <TableTdContent className="w-1/5">
                   {installment.installmentNumber}
@@ -73,15 +71,27 @@ export default function PaymentTable({
           })}
         </tbody>
       </table>
-      <ButtonHoverIcon
-        icon={<FaPlus />}
-        onClick={() => {
-          openPopup()
-          applyContent(addAppointmentPopupContent)
-        }}
-      >
-        Adicionar Compromisso
-      </ButtonHoverIcon>
+      {installments?.length === 0 ? (
+        <ButtonHoverIcon
+          icon={<FaPlus />}
+          onClick={() => {
+            openPopup()
+            applyContent(addAppointmentPopupContent)
+          }}
+        >
+          Adicionar Pagamento
+        </ButtonHoverIcon>
+      ) : (
+        <ButtonHoverIcon
+          icon={<FaTrash />}
+          onClick={() => {
+            openPopup()
+            applyContent(deleteAppointmentPopupContent)
+          }}
+        >
+          Excluir Todos Pagamentos
+        </ButtonHoverIcon>
+      )}
     </div>
   )
 }

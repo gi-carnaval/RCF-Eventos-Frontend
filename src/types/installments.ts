@@ -1,12 +1,14 @@
 export interface InstallmentsProps {
   id: string
-  installmentNumber: string
+  installmentNumber: number
   date: string
   installmentValue: number
 }
 
 export interface CreateInstallmentsProps {
-  installmentNumber: string
-  date: string
+  downPayment: number
+  installmentQuantity: number
+  startDate: string
   installmentValue: number
+  eventId?: string
 }
