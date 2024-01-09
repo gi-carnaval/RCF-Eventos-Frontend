@@ -8,6 +8,7 @@ import Input from '../atoms/Input'
 import { useForm } from 'react-hook-form'
 import InputErrorMessage from '../atoms/InputErrorMessage'
 import { Button } from '../atoms/Button'
+import { IEvent } from '@/src/types/event'
 
 interface FormData {
   hirer: string
@@ -32,7 +33,7 @@ export default function CreateEventForm() {
     }
   }
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: IEvent) {
     await eventRepository.createEvent(data)
     // alert('Enviou: ')
   }
