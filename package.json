@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "./",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -25,7 +26,6 @@
     "@rocketseat/eslint-config": "^2.1.0",
     "axios": "^1.6.1",
     "dayjs": "^1.11.10",
-    "dotenv": "^16.4.1",
     "formik": "^2.4.5",
     "lint-staged": "^15.1.0",
     "node-fetch": "^2.6.7",
