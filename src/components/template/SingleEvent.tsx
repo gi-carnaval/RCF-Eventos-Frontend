@@ -12,7 +12,6 @@ import { PhotoShootTable } from '../organism/PhotoShootTable'
 import { PhotoPanelTable } from '../organism/PhotoPanelTable'
 import PaymentTable from '../organism/PaymentTable'
 import HirerEditForm from '../molecules/HirerEditForm'
-import { useForceRerender } from '@/src/Hooks/useForceRerender'
 
 type ParamsProps = {
   id: string
@@ -21,8 +20,6 @@ type ParamsProps = {
 export default function SingleEvent() {
   const { id } = useParams<ParamsProps>()
   const [event, setEvent] = useState<IEvent>()
-
-  const { forceRerender, toggleForceRerender } = useForceRerender()
 
   const { isPopupOpen } = usePopup()
   const navigate = useNavigate()
@@ -40,10 +37,10 @@ export default function SingleEvent() {
     if (!isPopupOpen && id) {
       fetchEventData(id).then((data) => {
         setEvent(data)
-        toggleForceRerender()
       })
     }
-  }, [id, isPopupOpen, forceRerender])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, isPopupOpen])
 
   return (
     <>

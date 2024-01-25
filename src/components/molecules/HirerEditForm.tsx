@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import InputErrorMessage from '../atoms/InputErrorMessage'
 import { useForm } from 'react-hook-form'
 import eventRepository from '@/src/repositories/EventRepository'
-import { useForceRerender } from '@/src/Hooks/useForceRerender'
 
 interface HirerEditFormProps {
   hirer?: string
@@ -13,7 +12,6 @@ interface HirerEditFormProps {
 
 export default function HirerEditForm({ hirer, eventId }: HirerEditFormProps) {
   const [isEditingHirer, setIsEditingHirer] = useState(false)
-  const { forceRerender, toggleForceRerender } = useForceRerender()
 
   const {
     register,
@@ -31,9 +29,7 @@ export default function HirerEditForm({ hirer, eventId }: HirerEditFormProps) {
       eventRepository.updateEventHirer(data.hirer, eventId)
     }
     setIsEditingHirer((prev) => !prev)
-    console.log('forceRerender antes do toggle', forceRerender)
-    toggleForceRerender()
-    console.log('forceRerender depois do toggle', forceRerender)
+    window.location.reload()
   }
 
   useEffect(() => {
