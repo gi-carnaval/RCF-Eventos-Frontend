@@ -1,5 +1,6 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'http://127.0.0.1:3030/',
+  // baseURL: import.meta.env.VITE_AXIOS_BASE_URL,
+  baseURL: `https://rcf-eventos-backend.vercel.app/`,
 })
