@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import InputErrorMessage from '../atoms/InputErrorMessage'
 import { useForm } from 'react-hook-form'
 import eventRepository from '@/src/repositories/EventRepository'
+import { useUpdateContext } from '@/src/Hooks/useUpdate'
 
 interface HirerEditFormProps {
   hirer?: string
@@ -12,6 +13,8 @@ interface HirerEditFormProps {
 
 export default function HirerEditForm({ hirer, eventId }: HirerEditFormProps) {
   const [isEditingHirer, setIsEditingHirer] = useState(false)
+
+  const { handleUpdate } = useUpdateContext()
 
   const {
     register,
@@ -27,9 +30,11 @@ export default function HirerEditForm({ hirer, eventId }: HirerEditFormProps) {
   function onSubmit(data: HirerEditFormProps) {
     if (data.hirer && eventId) {
       eventRepository.updateEventHirer(data.hirer, eventId)
+      console.log('Entrou')
     }
     setIsEditingHirer((prev) => !prev)
-    window.location.reload()
+    handleUpdate()
+    // window.location.reload()
   }
 
   useEffect(() => {

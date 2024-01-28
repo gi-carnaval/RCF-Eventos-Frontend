@@ -12,6 +12,7 @@ import { PhotoShootTable } from '../organism/PhotoShootTable'
 import { PhotoPanelTable } from '../organism/PhotoPanelTable'
 import PaymentTable from '../organism/PaymentTable'
 import HirerEditForm from '../molecules/HirerEditForm'
+import { useUpdateContext } from '@/src/Hooks/useUpdate'
 
 type ParamsProps = {
   id: string
@@ -20,6 +21,7 @@ type ParamsProps = {
 export default function SingleEvent() {
   const { id } = useParams<ParamsProps>()
   const [event, setEvent] = useState<IEvent>()
+  // const [hirer, setHirer] = useState('')
 
   const { isPopupOpen } = usePopup()
   const navigate = useNavigate()
@@ -33,14 +35,18 @@ export default function SingleEvent() {
       throw error
     }
   }
+
+  const { shouldUpdate } = useUpdateContext()
+
   useEffect(() => {
     if (!isPopupOpen && id) {
       fetchEventData(id).then((data) => {
         setEvent(data)
+        // setHirer(data.hirer)
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, isPopupOpen])
+  }, [id, isPopupOpen, shouldUpdate])
 
   return (
     <>
