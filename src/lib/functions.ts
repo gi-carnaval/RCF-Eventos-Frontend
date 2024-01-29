@@ -30,7 +30,7 @@ export async function generateReport(id: string | undefined) {
     const response = await eventRepository.getEventReport(id)
     const blob = new Blob([response.data], { type: 'text/html' })
     const url = window.URL.createObjectURL(blob)
-    window.open(url, '_blank')
+    window.open(url, '_blank')?.print()
     window.URL.revokeObjectURL(url)
   } catch (error) {
     console.error(error)
