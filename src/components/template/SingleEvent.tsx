@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import eventRepository from '../../repositories/EventRepository'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { IEvent } from '../../types/event'
 import AppointmentTable from '../organism/AppointmentTable'
 import { usePopup } from '@/src/Hooks/usePopup'
@@ -26,7 +26,7 @@ export default function SingleEvent() {
   const { isPopupOpen } = usePopup()
   const navigate = useNavigate()
 
-  async function fetchEventData(eventId: string) {
+  const fetchEventData = useCallback(async (eventId: string) => {
     try {
       const res = await eventRepository.getEventById(eventId)
       return res.data
@@ -34,7 +34,7 @@ export default function SingleEvent() {
       console.error('Erro ao buscar evento:', error)
       throw error
     }
-  }
+  }, [])
 
   const { shouldUpdate } = useUpdateContext()
 
@@ -47,7 +47,6 @@ export default function SingleEvent() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, isPopupOpen, shouldUpdate])
-
   return (
     <>
       <div className="flex justify-start pb-24">

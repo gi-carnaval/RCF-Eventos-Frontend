@@ -18,9 +18,7 @@ async function updateEventHirer(hirer: string, eventId: string) {
 }
 
 async function getEventReport(eventId: string | undefined) {
-  return await api.get(`/eventReport/pdf/${eventId}`, {
-    responseType: 'arraybuffer',
-  })
+  return await api.get(`/eventReport/${eventId}`)
 }
 
 async function createEventPhotographicRegister(

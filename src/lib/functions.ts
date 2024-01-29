@@ -28,12 +28,12 @@ export function getEventTotalValue({
 export async function generateReport(id: string | undefined) {
   try {
     const response = await eventRepository.getEventReport(id)
-    const blob = new Blob([response.data], { type: 'application/pdf' })
-
+    const blob = new Blob([response.data], { type: 'text/html' })
     const url = window.URL.createObjectURL(blob)
     window.open(url, '_blank')
     window.URL.revokeObjectURL(url)
   } catch (error) {
+    console.error(error)
     alert('Error downloading PDF')
   }
 }
