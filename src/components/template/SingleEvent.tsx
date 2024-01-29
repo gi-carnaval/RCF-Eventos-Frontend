@@ -29,7 +29,7 @@ export default function SingleEvent() {
   const fetchEventData = useCallback(async (eventId: string) => {
     try {
       const res = await eventRepository.getEventById(eventId)
-      return res.data
+      setEvent(res.data)
     } catch (error) {
       console.error('Erro ao buscar evento:', error)
       throw error
@@ -40,10 +40,7 @@ export default function SingleEvent() {
 
   useEffect(() => {
     if (!isPopupOpen && id) {
-      fetchEventData(id).then((data) => {
-        setEvent(data)
-        // setHirer(data.hirer)
-      })
+      fetchEventData(id)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, isPopupOpen, shouldUpdate])
