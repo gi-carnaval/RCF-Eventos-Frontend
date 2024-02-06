@@ -1,27 +1,50 @@
-# React + TypeScript + Vite
+# RCF-Eventos Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este e o README para o projeto React + Typescript + Vite de gerenciamento de Eventos de um fotógrafo.
 
-Currently, two official plugins are available:
+## Descrição do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p>Projeto desenvolvido para gerenciamento de Eventos e contratos de um fotógrafo. </p>
+<p>
+   Neste Aplicativo Web ele tem a possibilidade de cadastrar, visualizar, atualizar e apagar eventos. Trazendo a facilidade de ter controle de toda sua agenda de trabalho em um único lugar.
+</p>
+<p>
+   Possui também uma funcionalidade de gerar o contrato, onde todas as informações cadastradas são adicionadas a um layout personalizado em formato pdf e fica disponível para ser baixado para impressão ou envio para o cliente.
+</p>
 
-## Expanding the ESLint configuration
+### **Telas do Projeto**
+<table>
+  <tr>
+    <td valign="top">
+      Tela de Inicial
+      <img src="./public/readmeAssets/telaDeEvento.png" width="1200" alt="Tela de Evento, onde pode-se adicionar e alterar as informações."/>
+    </td>
+    <td valign="top">
+      Tela de Evento
+      <img src="./public/readmeAssets/telaDeEvento.png" width="1200" alt="Tela de Evento, onde pode-se adicionar e alterar as informações."/>
+   </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      Tela de Evento - Pagamentos
+      <img src="./public/readmeAssets/telaDeEventoPagamentos.png" width="1200" alt="Tela de Evento, visualização dos pagamentos do evento."/>
+    </td>
+    <td valign="top">
+      Tela de Evento - Cadastro de Album
+      <img src="./public/readmeAssets/telaDeEventoAddAlbum.png" width="1200" alt="Tela de Evento, popup de cadastro de album ao evento."/>
+   </td>
+  </tr>
+</table>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Autor
 
-- Configure the top-level `parserOptions` property like this:
+👤 **Giovani Carnaval**
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+* Linkedin: [@Gi-Carnaval](https://www.linkedin.com/in/giovani-carnaval/)
+* Github: [@Gi-Carnaval](https://github.com/gi-carnaval)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Mostre seu apoio
+
+Deixe uma ⭐️ se este projeto foi útil!
+
+***
